@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     super
     @users = []
   end
+
   def index
     @users = User.all
   end
