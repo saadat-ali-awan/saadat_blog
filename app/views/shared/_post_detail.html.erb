@@ -1,0 +1,11 @@
+<div class="post">
+  <div class="post-number">Post #<%= post_detail.id %></div>
+  <div class="post-detail"><%= post_detail.text %></div>
+  <div class="likes-comments">Comments: 
+    <%= post_detail.comment_counter == nil ? 0 : post_detail.comment_counter %>, Likes: 
+    <%= post_detail.like_counter == nil ? 0 : post_detail.like_counter %>
+  </div>
+  <%if display_comments == true%>
+    <%= render partial: "shared/comment", collection: post_detail.comments %>
+  <%end%>
+</div>

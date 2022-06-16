@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>SaadatBlog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<%= render partial: 'shared/user', locals: { user: @user_info } %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+<div class="bio">
+  <h3 class="bio-head">Bio: </h3>
+  <div class="bio-desc"><%= @user_info.bio %></div>
+</div>
 
-  <body>
-    Show A User...
-  </body>
-</html>
+<section class="posts">
+  <%= render partial: 'shared/post_detail', collection: @posts, locals: {display_comments: false} %>
+  <button>See all posts</button>
+</section>
