@@ -44,6 +44,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         if new_post.save
+          new_post.increment_user_post_counter
           flash[:success] = [ "Post Created Successfully" ]
           redirect_to posts_url
         else
