@@ -1,4 +1,7 @@
+require_relative './modules/form_error_handler'
 class PostsController < ApplicationController
+  include FormErrorHandler
+
   def index
     index = params['user_id']
     @user = User.find(index)
@@ -22,35 +25,23 @@ class PostsController < ApplicationController
   def create
     new_post = Post.new(post_params)
     errors = []
-    errors << "Title Missing From Post" if params[:post][:title] == ''
-    errors << "Text Missing From Post" if params[:post][:text] == ''
-    unless errors.length.zero?
-      errors.each do |error|
-        if flash.now[:danger].nil?
-          flash.now[:danger] = [ error ]
-        else
-          flash.now[:danger] << error
-        end
-      end
-      respond_to do |format|
-        format.html do
-          render :new, locals: {post: new_post}, status: 422
-        end
-      end
-      
-      return
-    end
-    new_post.author = current_user
+    errors << 'Title Missing From Post' if params[:post][:title] == ''
+    errors << 'Text Missing From Post' if params[:post][:text] == ''
+    found_errors = validate_form(errors)
+
     respond_to do |format|
       format.html do
-        if new_post.save
-          new_post.increment_user_post_counter
-          flash[:success] = [ "Post Created Successfully" ]
-          redirect_to posts_url
-        else
-          flash.now[:danger] = [ "Error: Post could not be saved" ]
-          render :new, locals: {post: new_post}, status: 422
+        unless found_errors
+          new_post.author = current_user
+          if new_post.save
+            new_post.increment_user_post_counter
+            flash[:success] = ['Post Created Successfully']
+            redirect_to posts_url
+            return
+          end
+          flash.now[:danger] = ['Post could not be saved']
         end
+        render :new, locals: { post: new_post }, status: 422
       end
     end
   end
