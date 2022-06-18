@@ -12,7 +12,7 @@ RSpec.describe 'PostsController', type: :request do
       comment_counter: 12,
       like_counter: 12,
       author: @user
-    ) 
+    )
   end
   it 'when post page found' do
     get "/users/#{@user.id}/posts"

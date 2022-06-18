@@ -12,7 +12,7 @@ describe 'Users Controller' do
       comment_counter: 12,
       like_counter: 12,
       author: @user
-    ) 
+    )
   end
   it 'open homepage' do
     get '/'

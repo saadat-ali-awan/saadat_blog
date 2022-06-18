@@ -1,21 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe Post, :type => :model do
+RSpec.describe Post, type: :model do
   user = User.create(
     name: 'Saadat',
     post_counter: 3
   )
-  subject { described_class.new(
-    title: 'My Title',
-    text: 'My Testing Post',
-    comment_counter: 12,
-    like_counter: 12,
-    author: user
-  ) }
+  subject do
+    described_class.new(
+      title: 'My Title',
+      text: 'My Testing Post',
+      comment_counter: 12,
+      like_counter: 12,
+      author: user
+    )
+  end
 
-  before {
+  before do
     subject.save
-  }
+  end
 
   it 'is valid when everthing is not nil' do
     expect(subject).to be_valid
@@ -23,7 +25,7 @@ RSpec.describe Post, :type => :model do
 
   it 'title should not be nil' do
     subject.title = nil
-    expect(subject).to_not be_valid   
+    expect(subject).to_not be_valid
   end
 
   it 'title must not be empty' do
@@ -34,19 +36,19 @@ RSpec.describe Post, :type => :model do
   it 'title can be between 1 and 250' do
     subject.title = 'a'
     expect(subject).to be_valid
-    subject.title = 'a'*250
+    subject.title = 'a' * 250
     expect(subject).to be_valid
   end
 
   it 'title must not be greater than 250' do
-    subject.title = 'a'*251
+    subject.title = 'a' * 251
     expect(subject).to_not be_valid
   end
 
   it 'text should not be nil' do
     subject.title = 'a'
     subject.text = nil
-    expect(subject).to_not be_valid   
+    expect(subject).to_not be_valid
   end
 
   it 'text must not be empty' do
@@ -57,12 +59,12 @@ RSpec.describe Post, :type => :model do
   it 'text can be between 1 and 250' do
     subject.text = 'a'
     expect(subject).to be_valid
-    subject.text = 'a'*250
+    subject.text = 'a' * 250
     expect(subject).to be_valid
   end
 
   it 'text must not be greater than 250' do
-    subject.text = 'a'*251
+    subject.text = 'a' * 251
     expect(subject).to_not be_valid
   end
 

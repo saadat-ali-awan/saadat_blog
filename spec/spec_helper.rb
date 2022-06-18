@@ -30,7 +30,7 @@ RSpec.configure do |config|
 
   if Bullet.enable?
     config.before(:each) { Bullet.start_request }
-    config.after(:each)  { Bullet.end_request }
+    config.after(:each) { Bullet.end_request }
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

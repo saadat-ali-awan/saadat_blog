@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Comment, :type => :model do
+RSpec.describe Comment, type: :model do
   user = User.create(
     name: 'Saadat',
     post_counter: 3
@@ -11,12 +11,14 @@ RSpec.describe Comment, :type => :model do
     comment_counter: 12,
     like_counter: 12,
     author: user
-  ) 
-  subject { described_class.new(
-    text: 'Good Post',
-    author: post.author,
-    post: post
-  ) }
+  )
+  subject do
+    described_class.new(
+      text: 'Good Post',
+      author: post.author,
+      post: post
+    )
+  end
 
   before { subject.save }
 

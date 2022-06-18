@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, :type => :model do
+RSpec.describe User, type: :model do
   subject { described_class.new }
 
   before { subject.save }
@@ -9,11 +9,11 @@ RSpec.describe User, :type => :model do
     expect(subject).to_not be_valid
   end
 
-  it 'should not have blank name'  do
-    subject.post_counter = 3   
-    subject.name = ""
+  it 'should not have blank name' do
+    subject.post_counter = 3
+    subject.name = ''
     expect(subject).to_not be_valid
-    subject.name = "A"
+    subject.name = 'A'
     expect(subject).to be_valid
   end
 

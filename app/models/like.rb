@@ -10,8 +10,6 @@ class Like < ApplicationRecord
   end
 
   def decrement_post_likes_counter
-    unless post.like_counter.zero?
-      post.decrement!(:like_counter)
-    end
+    post.decrement!(:like_counter) unless post.like_counter.zero?
   end
 end
