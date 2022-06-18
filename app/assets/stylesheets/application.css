@@ -159,29 +159,46 @@
   text-align: center;
 }
 
-.post-form {
+.post-form,
+.comment-form {
   display: flex;
   width: 70%;
   flex-direction: column;
   align-self: center;
 }
 
-.post-form > div {
+.post-form > div,
+.comment-form > div {
   display: flex;
   justify-content: center;
 }
 
 .post-form > div *,
-.post-form > input[type='submit'] {
+.comment-form > div *,
+.comment-form > input[type='submit'],
+.post-form > input[type='submit'],
+.like-btn {
   width: 100%;
   margin-top: 1rem;
   padding: 1rem;
   font-size: 1rem;
 }
 
-.post-form > input[type='submit'] {
+.post-form > input[type='submit'],
+.comment-form > input[type='submit'],
+.like-btn {
   align-self: center;
   width: unset;
+}
+
+.like-btn {
+  padding: 0.5rem 1rem;
+  align-self: flex-end;
+}
+
+.new-like > form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* .user-details > div > div:last-child {
