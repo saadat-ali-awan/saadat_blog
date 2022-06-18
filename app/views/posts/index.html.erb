@@ -1,3 +1,6 @@
+<%= render partial: 'shared/flash'%>
+<%= link_to 'New Post', new_post_path %>
+<br>
 <%= render partial: 'shared/user', locals: { user: @user } %>
 <br>
 <section class='posts'>

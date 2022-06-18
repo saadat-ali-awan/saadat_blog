@@ -19,6 +19,12 @@
   margin: 0;
 }
 
+.post-form > div,
+.comment-form > div {
+  display: flex;
+  justify-content: center;
+}
+
 .user-details,
 .user-details > div {
   display: flex;
@@ -128,6 +134,71 @@
 .post-body {
   font-size: 1.5rem;
   padding: 3rem 0;
+}
+
+.alert {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 12px;
+}
+
+.alert-success {
+  background-color: aquamarine;
+  border: 1px solid rgb(80, 167, 138);
+}
+
+.alert-danger {
+  background-color: red;
+  border: 1px solid rgb(167, 0, 0);
+  color: #fff;
+}
+
+.new-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-post > h1 {
+  text-align: center;
+}
+
+.post-form,
+.comment-form {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  align-self: center;
+}
+
+.post-form > div *,
+.comment-form > div *,
+.comment-form > input[type='submit'],
+.post-form > input[type='submit'],
+.like-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.post-form > input[type='submit'],
+.comment-form > input[type='submit'],
+.like-btn {
+  align-self: center;
+  width: unset;
+}
+
+.like-btn {
+  padding: 0.5rem 1rem;
+  align-self: flex-end;
+}
+
+.new-like > form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* .user-details > div > div:last-child {
