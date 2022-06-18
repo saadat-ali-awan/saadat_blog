@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     unless found_errors
       new_comment.author = current_user
       new_comment.post = Post.find(params[:id])
-      
+
       if new_comment.save
         new_comment.post.increment!(:comment_counter)
         flash[:success] = ['Comment Added Successfully']
@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:text)
   end
