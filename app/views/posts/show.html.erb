@@ -7,8 +7,12 @@
       <%= @post.like_counter.nil? ? 0 : @post.like_counter %></div>
   </div>
   <div class="post-body"><%= @post.text %></div>
+  <br>
+  <%= render partial: "like", locals: { like: Like.new } %>
+  <br>
   <div class="comments">
     <h3>Comments:</h3>
+    <%= render partial: "comment", locals: { comment: Comment.new }%>
     <br>
     <%= render partial: "shared/comment", collection: @post.comments %>
   </div>
