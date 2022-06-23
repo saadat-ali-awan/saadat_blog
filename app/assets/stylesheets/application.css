@@ -221,8 +221,7 @@ form.new_user,
   color: #343434;
 }
 
-form.new_user
-.actions {
+form.new_user.actions {
   text-align: center;
   padding: 10px 0;
 }
@@ -245,6 +244,7 @@ form.new_user .field input:not([type="checkbox"]) {
   height: 35px;
   outline: none;
 }
+
 form.new_user .field label {
   color: #494848;
 }
