@@ -205,3 +205,15 @@
 /* .user-details > div > div:last-child {
   text-align: end;
 } */
+
+form.new_user,
+.auth-link-options,
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  border: 1px solid red;
+  max-width: 300px;
+  gap: 10px;
+  padding: 10px 0;
+}
