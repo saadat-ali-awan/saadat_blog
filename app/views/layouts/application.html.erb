@@ -12,6 +12,16 @@
 
   <body>
     <div class="app">
+      <% if user_signed_in?%>
+          <%=button_to "Log out", 
+            destroy_user_session_path, 
+            method: :delete,
+            class:'link',
+            data: { turbo: false }
+          %>
+        <%end%>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </body>

@@ -1,9 +1,15 @@
 <div class='user-details-container'>
+  <% if current_page?(:controller => :users, :action => :index) %>
+  <a href="/users/<%= user.id %>">
+  <% end %>
   <div class='user-details'>
-    <img src=<%= user.photo %> alt="User Photo" />
+    <img src="<%= user.photo %>" alt="User Photo" />
     <div>
       <div><%= user.name %></div>
       <div>Number of posts: <%= user['post_counter'] == nil ? '0' : user['post_counter'] %></div>
     </div>
   </div>
+  <% if current_page?(:controller => :users, :action => :index) %>
+  </a>
+  <% end %>
 </div>
