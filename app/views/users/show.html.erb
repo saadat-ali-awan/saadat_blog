@@ -7,5 +7,5 @@
 
 <section class="posts">
   <%= render partial: 'shared/post_detail', collection: @posts, locals: {display_comments: false} %>
-  <button>See all posts</button>
+  <a class='all-post-btn' href="/users/<%= @user_info.id %>/posts">See all posts</a>
 </section>
