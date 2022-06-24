@@ -1,5 +1,6 @@
 require_relative './modules/form_error_handler'
 class PostsController < ApplicationController
+  load_and_authorize_resource
   include FormErrorHandler
 
   def index
@@ -43,6 +44,17 @@ class PostsController < ApplicationController
         end
         render :new, locals: { post: new_post }, status: 422
       end
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:post_id])
+    @post.destroy
+    flash[:success] = ['Post Deleted Successfully']
+     
+    respond_to do |format|
+      format.html { redirect_to "/users/#{current_user.id}/posts" }
+      format.json { head :no_content }
     end
   end
 
