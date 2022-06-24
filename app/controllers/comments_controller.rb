@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       new_comment.post = Post.find(params[:id])
 
       if new_comment.save
-        increment_post_comments_counter
+        new_comment.increment_post_comments_counter
         flash[:success] = ['Comment Added Successfully']
         redirect_to user_post_path(user_id: params[:user_id], id: params[:id])
         return
