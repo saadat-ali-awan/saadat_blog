@@ -1,5 +1,9 @@
 <div class="post">
-  <div class="post-number">Post #<%= post_detail.id %></div>
+
+  <a href="<%= user_post_path(user_id: post_detail.user_id, id: post_detail.id) %>">
+    <div class="post-number">Post #<%= post_detail.id %></div>
+  </a>
+
   <div class="post-detail"><%= post_detail.text %></div>
   <div class="likes-comments">Comments: 
     <%= post_detail.comment_counter == nil ? 0 : post_detail.comment_counter %>, Likes: 
