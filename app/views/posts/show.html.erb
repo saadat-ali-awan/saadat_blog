@@ -9,9 +9,11 @@
   <div class="post-body"><%= @post.text %></div>
   <br>
   <%= render partial: "like", locals: { like: Like.new } %>
-  <%= button_to "Delete", delete_post_path(post_id: @post.id), method: :delete, data: {
-    turbolinks: false,
-  } %>
+  <% if can? :destroy, @post %>
+    <%= button_to "Delete", delete_post_path(post_id: @post.id), method: :delete, data: {
+      turbolinks: false,
+    } %>
+  <% end %>
   <br>
   <div class="comments">
     <h3>Comments:</h3>
