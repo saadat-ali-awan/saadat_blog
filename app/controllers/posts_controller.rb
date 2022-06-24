@@ -49,6 +49,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
+    authorize! :destroy, @post
+    @comment = @post.comments 
+    @comment.each do |comment|
+        comment.destroy
+    end
     @post.destroy
     flash[:success] = ['Post Deleted Successfully']
      
