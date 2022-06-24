@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :danger, :info, :warning, :success, :messages
 
-  rescue_from CanCan::AccessDenied do | exception |
+  rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, alert: exception.message
   end
 

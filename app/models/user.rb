@@ -11,10 +11,10 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 1 }
   validates :post_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  Roles = [ :admin, :default]
+  ROLES = %i[admin default].freeze
 
   def is?(requested_role)
-    self.role == requested_role.to_s
+    role == requested_role.to_s
   end
 
   def self.three_most_recent_posts(user)
