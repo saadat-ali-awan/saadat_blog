@@ -1,4 +1,9 @@
 <div class="comment">
   <div class="comment-user"><%= comment.author.name %></div>
   <div class="comment-text"><%= comment.text %></div>
+    <% if can? :destroy, @post %>
+    <%= button_to "Delete", delete_comment_path(comment_id: @comment.id), method: :delete, data: {
+      turbolinks: false,
+    } %>
+  <% end %>
 </div>

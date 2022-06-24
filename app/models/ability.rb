@@ -9,7 +9,10 @@ class Ability
     else
       can %i[create destroy], Post, user_id: user.id
       can :read, :all
+      can %i[create destroy], Comment, user_id: user.id
+      can :read, :all
     end
+
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

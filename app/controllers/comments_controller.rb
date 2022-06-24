@@ -1,6 +1,7 @@
 require_relative './modules/form_error_handler'
 
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   include FormErrorHandler
 
   def comment
@@ -21,6 +22,18 @@ class CommentsController < ApplicationController
       end
     end
     redirect_to user_post_path(user_id: params[:user_id], id: params[:id])
+  end
+
+  def destroy
+    @comment = Comment.find(params[:comment_id])
+    authorize! :destroy, @comment
+    @comment.destroy
+    flash[:success] = ['Comment Deleted Successfully']
+
+    respond_to do |format|
+      format.html { redirect_to "/users/#{current_user.id}/posts" }
+      format.json { head :no_content }
+    end
   end
 
   private

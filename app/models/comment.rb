@@ -7,6 +7,8 @@ class Comment < ApplicationRecord
 
   validates :text, presence: true, length: { minimum: 1 }
 
+  after_destroy :decrement_post_comments_counter
+
   def increment_post_comments_counter
     post.increment!(:comment_counter)
   end
