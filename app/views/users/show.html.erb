@@ -5,6 +5,12 @@
   <div class="bio-desc"><%= @user_info.bio %></div>
 </div>
 
+<% if current_user == @user_info  %>
+  <div class="new-post-btn-container">
+    <%= link_to 'New Post', new_post_path, class: "new-post-btn" %>
+  </div>
+<% end %>
+
 <section class="posts">
   <%= render partial: 'shared/post_detail', collection: @posts, locals: {display_comments: false} %>
   <a class='all-post-btn' href="/users/<%= @user_info.id %>/posts">See all posts</a>
