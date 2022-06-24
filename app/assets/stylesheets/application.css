@@ -215,3 +215,66 @@
   display: inline-block;
   margin: 1rem 0;
 }
+
+/* .user-details > div > div:last-child {
+  text-align: end;
+} */
+
+form.new_user,
+.auth-link-options,
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 300px;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.auth-header {
+  color: #343434;
+}
+
+form.new_user.actions {
+  text-align: center;
+  padding: 10px 0;
+}
+
+form.new_user .actions input {
+  display: inline-block;
+  background: dodgerblue;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: 0.6s;
+}
+
+form.new_user .field input:not([type="checkbox"]) {
+  width: 100%;
+  border: 1px solid #c3c3c3;
+  padding: 5px 2px;
+  border-radius: 4px;
+  height: 35px;
+  outline: none;
+}
+
+form.new_user .field label {
+  color: #494848;
+}
+
+form.new_user .actions input:hover,
+form.new_user .actions input:focus {
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.auth-link-options a {
+  text-decoration: none;
+  color: #333;
+  transition: 0.6s;
+}
+
+.auth-link-options a:hover {
+  color: #000;
+}
