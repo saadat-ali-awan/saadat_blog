@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'htmlentities'
 include ActionView::Helpers::TextHelper
 RSpec.describe "Login Page", type: :system do
   before :all do
+    @coder = HTMLEntities.new
     @first_user ||= User.create(
       name: 'Tom',
       photo: 'https://live.staticflickr.com/65535/52122569383_698a119861_z.jpg',
@@ -44,29 +46,29 @@ RSpec.describe "Login Page", type: :system do
       sleep 2
     end
 
-    it 'shows the profile picture for each user' do
-      expect(page.has_xpath?("//img[@src = '#{@first_user.photo}' ]"))
-    end
+    # it 'shows the profile picture for each user' do
+    #   expect(page.has_xpath?("//img[@src = '#{@first_user.photo}' ]"))
+    # end
 
-    it 'shows the username' do
-      expect(page).to have_content(@first_user.name)
-    end
+    # it 'shows the username' do
+    #   expect(page).to have_content(@first_user.name)
+    # end
 
-    it 'shows the number of posts of the user' do
-      expect(page).to have_content("Number of posts: #{@first_user.post_counter}")
-    end
+    # it 'shows the number of posts of the user' do
+    #   expect(page).to have_content("Number of posts: #{@first_user.post_counter}")
+    # end
 
-    it 'shows posts title' do
-      @posts.each do |post|
-        expect(page).to have_content(post.title)
-      end
-    end
+    # it 'shows posts title' do
+    #   @posts.each do |post|
+    #     expect(page).to have_content(post.title)
+    #   end
+    # end
 
     it 'shows some part of the post body' do
       @posts.each do |post|
-        puts truncate(post.text, :length => 80)
+        puts @coder.decode truncate(post.text, :length => 80)
         puts post.text
-        expect(page).to have_content(truncate(post.text, :length => 80))
+        expect(page).to have_content(@coder.decode truncate(post.text, :length => 80))
       end
     end
   end
