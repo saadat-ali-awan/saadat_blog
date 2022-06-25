@@ -83,12 +83,12 @@
 
 .all-post-btn {
   align-self: center;
-  padding: 4px;
   background-color: #343434;
   color: #fff;
   border: 1px solid #000;
   cursor: pointer;
   text-decoration: none;
+  padding: 0.5rem 1rem;
 }
 
 .post {
@@ -200,6 +200,20 @@
 .new-like > form {
   display: flex;
   flex-direction: column;
+}
+
+.new-post-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.new-post-btn {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: #343434;
+  color: #fff;
+  display: inline-block;
+  margin: 1rem 0;
 }
 
 /* .user-details > div > div:last-child {
