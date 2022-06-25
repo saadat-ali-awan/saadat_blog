@@ -1,8 +1,12 @@
 require 'rails_helper'
 require 'htmlentities'
 include ActionView::Helpers::TextHelper
-RSpec.describe "Login Page", type: :system do
+RSpec.describe "Post Index", type: :system do
   before :all do
+    Comment.delete_all
+    Like.delete_all
+    Post.delete_all
+    User.delete_all
     @coder = HTMLEntities.new
     @first_user ||= User.create(
       name: 'Tom',
@@ -35,7 +39,7 @@ RSpec.describe "Login Page", type: :system do
     Comment.create(text: 'Comment 3', post: @post1, author: @first_user)
   end
   
-  describe 'Home Page' do
+  describe 'Page' do
     before :each do
       visit new_user_session_path
       fill_in "user[email]",	with: "saadatali0202@gmail.com"
@@ -46,23 +50,23 @@ RSpec.describe "Login Page", type: :system do
       sleep 2
     end
 
-    # it 'shows the profile picture for each user' do
-    #   expect(page.has_xpath?("//img[@src = '#{@first_user.photo}' ]"))
-    # end
+    it 'shows the profile picture for each user' do
+      expect(page.has_xpath?("//img[@src = '#{@first_user.photo}' ]"))
+    end
 
-    # it 'shows the username' do
-    #   expect(page).to have_content(@first_user.name)
-    # end
+    it 'shows the username' do
+      expect(page).to have_content(@first_user.name)
+    end
 
-    # it 'shows the number of posts of the user' do
-    #   expect(page).to have_content("Number of posts: #{@first_user.post_counter}")
-    # end
+    it 'shows the number of posts of the user' do
+      expect(page).to have_content("Number of posts: #{@first_user.post_counter}")
+    end
 
-    # it 'shows posts title' do
-    #   @posts.each do |post|
-    #     expect(page).to have_content(post.title)
-    #   end
-    # end
+    it 'shows posts title' do
+      @posts.each do |post|
+        expect(page).to have_content(post.title)
+      end
+    end
 
     it 'shows some part of the post body' do
       @posts.each do |post|

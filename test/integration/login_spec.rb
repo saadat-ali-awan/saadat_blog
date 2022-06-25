@@ -1,7 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Login Page", type: :system do
+RSpec.describe "Login", type: :system do
   before :all do
+    Comment.delete_all
+    Like.delete_all
+    Post.delete_all
+    User.delete_all
     @first_user ||= User.create(
       name: 'Tom',
       photo: 'https://live.staticflickr.com/65535/52122569383_698a119861_z.jpg',
@@ -12,7 +16,7 @@ RSpec.describe "Login Page", type: :system do
       confirmed_at: '2022-06-14 21:22:04.937699'
     )
   end
-  describe 'Login Page' do
+  describe 'Page' do
     it 'shows the right content' do
       visit new_user_session_path
       expect(page).to have_content('Log in')

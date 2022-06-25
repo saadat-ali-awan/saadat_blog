@@ -1,7 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Login Page", type: :system do
+RSpec.describe "User Show", type: :system do
   before :all do
+    Comment.delete_all
+    Like.delete_all
+    Post.delete_all
+    User.delete_all
     @first_user ||= User.create(
       name: 'Tom',
       photo: 'https://live.staticflickr.com/65535/52122569383_698a119861_z.jpg',
@@ -28,8 +32,9 @@ RSpec.describe "Login Page", type: :system do
     @posts = Post.where(author: @first_user)
   end
   
-  describe 'Home Page' do
+  describe 'Page' do
     before :each do
+      sleep 2
       visit new_user_session_path
       fill_in "user[email]",	with: "saadatali0202@gmail.com"
       fill_in "user[password]",	with: "123456"
@@ -66,10 +71,11 @@ RSpec.describe "Login Page", type: :system do
     end
 
     it 'opens users post on click' do
+      post = @first_user.posts.last
       sleep 2
-      find("a[href='/users/#{@first_user.id}/posts/4']").click
+      find("a[href='/users/#{@first_user.id}/posts/#{post.id}']").click
       sleep 2
-      expect(page).to have_current_path("/users/#{@first_user.id}/posts/4")
+      expect(page).to have_current_path("/users/#{@first_user.id}/posts/#{post.id}")
     end
 
     it 'opens all posts on All post button click' do

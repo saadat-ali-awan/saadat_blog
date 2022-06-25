@@ -1,7 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Login Page", type: :system do
+RSpec.describe "Page", type: :system do
   before :all do
+    Comment.delete_all
+    Like.delete_all
+    Post.delete_all
+    User.delete_all
     @first_user ||= User.create(
       name: 'Tom',
       photo: 'https://live.staticflickr.com/65535/52122569383_698a119861_z.jpg',
@@ -25,12 +29,14 @@ RSpec.describe "Login Page", type: :system do
     Post.create(author: @second_user, title: 'Post 1', text: 'My Post 1')
   end
   
-  describe 'Home Page' do
+  describe 'Page' do
     before :each do
       visit new_user_session_path
       fill_in "user[email]",	with: "saadatali0202@gmail.com"
       fill_in "user[password]",	with: "123456"
       click_button 'commit'
+      sleep 2
+      visit root_path
       sleep 2
     end
 
