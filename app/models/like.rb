@@ -5,6 +5,10 @@ class Like < ApplicationRecord
   validates_associated :post
   validates_associated :author
 
+  after_save :increment_post_likes_counter
+
+  after_destroy :decrement_post_likes_counter
+
   def increment_post_likes_counter
     post.increment!(:like_counter)
   end

@@ -23,6 +23,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def add_post_save_error_messages(msgs)
+    flash.now[:danger] = []
+    msgs.each do |message|
+      flash.now[:danger] << message
+    end
+    flash.now[:danger] << 'Post could not be saved'
+  end
+
   def create
     new_post = Post.new(post_params)
     errors = []
@@ -35,12 +43,11 @@ class PostsController < ApplicationController
         unless found_errors
           new_post.author = current_user
           if new_post.save
-            new_post.increment_user_post_counter
             flash[:success] = ['Post Created Successfully']
             redirect_to posts_url
             return
           end
-          flash.now[:danger] = ['Post could not be saved']
+          add_post_save_error_messages(new_post.errors.full_messages)
         end
         render :new, locals: { post: new_post }, status: 422
       end
