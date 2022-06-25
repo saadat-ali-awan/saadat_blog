@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User Show", type: :system do
+RSpec.describe 'User Show', type: :system do
   before :all do
     Comment.delete_all
     Like.delete_all
@@ -31,13 +31,13 @@ RSpec.describe "User Show", type: :system do
     Post.create(author: @second_user, title: 'Post 1', text: 'My Post 1')
     @posts = Post.where(author: @first_user)
   end
-  
+
   describe 'Page' do
     before :each do
       sleep 2
       visit new_user_session_path
-      fill_in "user[email]",	with: "saadatali0202@gmail.com"
-      fill_in "user[password]",	with: "123456"
+      fill_in 'user[email]',	with: 'saadatali0202@gmail.com'
+      fill_in 'user[password]',	with: '123456'
       click_button 'commit'
       sleep 2
       visit "/users/#{@first_user.id}"

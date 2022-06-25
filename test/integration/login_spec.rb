@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Login", type: :system do
+RSpec.describe 'Login', type: :system do
   before :all do
     Comment.delete_all
     Like.delete_all
@@ -31,17 +31,17 @@ RSpec.describe "Login", type: :system do
 
     it 'shows error with wrong credentials' do
       visit new_user_session_path
-      fill_in "user[email]",	with: "saadatali0202@gmail.com"
-      fill_in "user[password]",	with: "123451"
+      fill_in 'user[email]',	with: 'saadatali0202@gmail.com'
+      fill_in 'user[password]',	with: '123451'
       click_button 'commit'
       sleep 1
-      expect(page).to have_content 'Invalid Email or password.'  
+      expect(page).to have_content 'Invalid Email or password.'
     end
 
     it 'logs in with right credentials' do
       visit new_user_session_path
-      fill_in "user[email]",	with: "saadatali0202@gmail.com"
-      fill_in "user[password]",	with: "123456"
+      fill_in 'user[email]',	with: 'saadatali0202@gmail.com'
+      fill_in 'user[password]',	with: '123456'
       click_button 'commit'
       sleep 3
       expect(page).to have_content 'Signed in successfully.'

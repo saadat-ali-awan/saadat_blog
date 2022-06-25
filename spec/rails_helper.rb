@@ -7,7 +7,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'active_record'
 require 'bullet'
-require "capybara/rspec"
+require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -54,15 +54,15 @@ RSpec.configure do |config|
   config.before(:each, bullet: :skip) do
     Bullet.enable = false
   end
-  
+
   config.after(:each, bullet: :skip) do
     Bullet.enable = true
   end
-  
+
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
-  
+
   config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -70,7 +70,7 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
   end
-  
+
   config.after(:each) do
     DatabaseCleaner.clean
   end

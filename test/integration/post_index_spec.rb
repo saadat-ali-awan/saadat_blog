@@ -1,7 +1,25 @@
 require 'rails_helper'
 require 'htmlentities'
-include ActionView::Helpers::TextHelper
-RSpec.describe "Post Index", type: :system do
+RSpec.describe 'Post Index', type: :system do
+  include ActionView::Helpers::TextHelper
+
+  def create_posts
+    long_body = 'Here, let\'s say clicking on the link \'foo\' triggers an asynchronous process, like an Ajax request,
+     that adds the link \'bar\'. It\'s likely that second statement will fail since the link does not exist yet.'
+    @post1 = Post.create(author: @first_user, title: 'Post 1', text: 'My Post 1')
+    Post.create(author: @first_user, title: 'Post 2', text: long_body)
+    Post.create(author: @first_user, title: 'Post 3', text: 'My Post 3')
+    Post.create(author: @first_user, title: 'Post 4', text: 'My Post 4')
+    Post.create(author: @second_user, title: 'Post 1 S', text: 'My Post 1 S')
+    @posts = Post.where(author: @first_user)
+  end
+
+  def create_comments
+    Comment.create(text: 'Comment 1', post: @post1, author: @first_user)
+    Comment.create(text: 'Comment 2', post: @post1, author: @second_user)
+    Comment.create(text: 'Comment 3', post: @post1, author: @first_user)
+  end
+
   before :all do
     Comment.delete_all
     Like.delete_all
@@ -26,22 +44,15 @@ RSpec.describe "Post Index", type: :system do
       created_at: '2022-06-15 01:40:30.027196000 +0000',
       confirmed_at: '2022-06-14 21:22:04.937699'
     )
-    long_body = 'Here, let\'s say clicking on the link \'foo\' triggers an asynchronous process, like an Ajax request, that adds the link \'bar\'. It\'s likely that second statement will fail since the link does not exist yet.'
-    @post1 = Post.create(author: @first_user, title: 'Post 1', text: 'My Post 1')
-    post2 = Post.create(author: @first_user, title: 'Post 2', text: long_body)
-    post3 = Post.create(author: @first_user, title: 'Post 3', text: 'My Post 3')
-    post4 = Post.create(author: @first_user, title: 'Post 4', text: 'My Post 4')
-    post5 = Post.create(author: @second_user, title: 'Post 1 S', text: 'My Post 1 S')
-    @posts = Post.where(author: @first_user)
-    Comment.create(text: 'Comment 1', post: @post1, author: @first_user)
-    Comment.create(text: 'Comment 2', post: @post1, author: @second_user)
-    Comment.create(text: 'Comment 3', post: @post1, author: @first_user)
+    create_posts
+    create_comments
   end
+
   describe 'Page' do
     before :each do
       visit new_user_session_path
-      fill_in "user[email]",  with: "saadatali0202@gmail.com"
-      fill_in "user[password]", with: "123456"
+      fill_in 'user[email]', with: 'saadatali0202@gmail.com'
+      fill_in 'user[password]', with: '123456'
       click_button 'commit'
       sleep 2
       visit "/users/#{@first_user.id}/posts"
@@ -63,13 +74,13 @@ RSpec.describe "Post Index", type: :system do
     end
     it 'shows some part of the post body' do
       @posts.each do |post|
-        puts @coder.decode truncate(post.text, :length => 80)
-        expect(page).to have_content(@coder.decode truncate(post.text, :length => 80))
+        puts @coder.decode truncate(post.text, length: 80)
+        expect(page).to have_content(@coder.decode(truncate(post.text, length: 80)))
       end
     end
     it 'shows first comment on post' do
-      lastComment = @post1.comments.last
-      expect(page).to have_content lastComment.text
+      last_comment = @post1.comments.last
+      expect(page).to have_content last_comment.text
     end
     it 'shows how many comments a post has' do
       expect(page).to have_content "Comments: #{@post1.comment_counter}"
@@ -78,7 +89,7 @@ RSpec.describe "Post Index", type: :system do
       expect(page).to have_content "Likes: #{@post1.like_counter}"
     end
     it 'should have pagination button' do
-      expect(page).to have_content "Pagination"
+      expect(page).to have_content 'Pagination'
     end
     it 'should open post when clicked' do
       find("a[href='/users/#{@first_user.id}/posts/#{@post1.id}']").click
