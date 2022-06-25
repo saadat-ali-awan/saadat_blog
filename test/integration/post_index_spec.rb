@@ -64,7 +64,6 @@ RSpec.describe "Post Index", type: :system do
     it 'shows some part of the post body' do
       @posts.each do |post|
         puts @coder.decode truncate(post.text, :length => 80)
-        puts post.text
         expect(page).to have_content(@coder.decode truncate(post.text, :length => 80))
       end
     end
