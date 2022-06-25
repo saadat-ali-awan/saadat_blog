@@ -9,8 +9,8 @@ class Ability
     else
       can %i[create destroy], Post, user_id: user.id
       can :read, :all
-      can %i[create destroy], Comment, user_id: user.id
-      can :read, :all
+      can %i[destroy], Comment, user_id: user.id
+      can :create, :all
     end
 
     # Define abilities for the user here. For example:

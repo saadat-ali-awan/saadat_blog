@@ -1,7 +1,6 @@
 require_relative './modules/form_error_handler'
 
 class CommentsController < ApplicationController
-  load_and_authorize_resource
   include FormErrorHandler
 
   def comment
@@ -25,7 +24,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:id])
     authorize! :destroy, @comment
     @comment.destroy
     flash[:success] = ['Comment Deleted Successfully']
