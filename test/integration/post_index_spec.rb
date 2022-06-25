@@ -33,47 +33,58 @@ RSpec.describe "Post Index", type: :system do
     post4 = Post.create(author: @first_user, title: 'Post 4', text: 'My Post 4')
     post5 = Post.create(author: @second_user, title: 'Post 1 S', text: 'My Post 1 S')
     @posts = Post.where(author: @first_user)
-
     Comment.create(text: 'Comment 1', post: @post1, author: @first_user)
     Comment.create(text: 'Comment 2', post: @post1, author: @second_user)
     Comment.create(text: 'Comment 3', post: @post1, author: @first_user)
   end
-  
   describe 'Page' do
     before :each do
       visit new_user_session_path
-      fill_in "user[email]",	with: "saadatali0202@gmail.com"
-      fill_in "user[password]",	with: "123456"
+      fill_in "user[email]",  with: "saadatali0202@gmail.com"
+      fill_in "user[password]", with: "123456"
       click_button 'commit'
       sleep 2
       visit "/users/#{@first_user.id}/posts"
       sleep 2
     end
-
     it 'shows the profile picture for each user' do
       expect(page.has_xpath?("//img[@src = '#{@first_user.photo}' ]"))
     end
-
     it 'shows the username' do
       expect(page).to have_content(@first_user.name)
     end
-
     it 'shows the number of posts of the user' do
       expect(page).to have_content("Number of posts: #{@first_user.post_counter}")
     end
-
     it 'shows posts title' do
       @posts.each do |post|
         expect(page).to have_content(post.title)
       end
     end
-
     it 'shows some part of the post body' do
       @posts.each do |post|
         puts @coder.decode truncate(post.text, :length => 80)
         puts post.text
         expect(page).to have_content(@coder.decode truncate(post.text, :length => 80))
       end
+    end
+    it 'shows first comment on post' do
+      lastComment = @post1.comments.last
+      expect(page).to have_content lastComment.text
+    end
+    it 'shows how many comments a post has' do
+      expect(page).to have_content "Comments: #{@post1.comment_counter}"
+    end
+    it 'shows how many likes a post has' do
+      expect(page).to have_content "Likes: #{@post1.like_counter}"
+    end
+    it 'should have pagination button' do
+      expect(page).to have_content "Pagination"
+    end
+    it 'should open post when clicked' do
+      find("a[href='/users/#{@first_user.id}/posts/#{@post1.id}']").click
+      sleep 2
+      expect(page).to have_current_path("/users/#{@first_user.id}/posts/#{@post1.id}")
     end
   end
 end
