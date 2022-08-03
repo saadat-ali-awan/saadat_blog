@@ -1,4 +1,4 @@
-require_relative './modules/form_error_handler'
+# require_relative './modules/form_error_handler'
 class PostsController < ApplicationController
   load_and_authorize_resource
   include FormErrorHandler
