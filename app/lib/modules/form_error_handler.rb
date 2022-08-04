@@ -1,4 +1,4 @@
-module FormErrorHandler
+module Modules::FormErrorHandler
   def validate_form(errors)
     unless errors.length.zero?
       errors.each do |error|

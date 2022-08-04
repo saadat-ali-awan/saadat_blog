@@ -1,7 +1,6 @@
-# require_relative './modules/form_error_handler'
 class PostsController < ApplicationController
   load_and_authorize_resource
-  include FormErrorHandler
+  include Modules::FormErrorHandler
 
   def index
     index = params['user_id']

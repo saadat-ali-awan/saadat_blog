@@ -1,7 +1,5 @@
-# require_relative './modules/form_error_handler'
-
 class CommentsController < ApplicationController
-  include FormErrorHandler
+  include Modules::FormErrorHandler
 
   def comment
     new_comment = Comment.new(comment_params)
