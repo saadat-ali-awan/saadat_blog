@@ -1,4 +1,4 @@
-## Copyright 2021, Saadat Ali, Alejandro Neira, John Luis Palacious Perez and Chris Clothier
+## Copyright 2021, Saadat Ali, Blessed Jason Mawanza
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this code and associated documentation files, to deal in the code without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the console app, and to permit persons to whom the console app is furnished to do so, subject to the following conditions:
 
