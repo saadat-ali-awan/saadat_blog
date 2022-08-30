@@ -1,0 +1,9 @@
+<section class="new-comment">
+  <%= render partial: 'shared/flash'%>
+  <%= form_with model: comment, url: new_comment_path, method: :post, html: {class: "comment-form"}, local: true, scope: :comment, data: {turbo: false} do |f| %>
+    <div>
+      <%= f.text_area :text, placeholder: "Write Comment", size: "30x5" %>
+    </div>
+    <%= f.submit "Add Comment" %>
+  <% end %>
+</section>

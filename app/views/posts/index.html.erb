@@ -1,0 +1,8 @@
+<%= render partial: 'shared/flash'%>
+<br>
+<%= render partial: 'shared/user', locals: { user: @user } %>
+<br>
+<section class='posts'>
+  <%= render partial: 'shared/post_detail', collection: @posts, locals: { display_comments: true } %>
+  <button>Pagination</button>
+</section>

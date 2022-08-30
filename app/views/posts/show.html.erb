@@ -1,0 +1,24 @@
+<section class="complete-post">
+  <div class="post-head">
+    <div>Post #<%= @post.id %> <%= @user.name %></div>
+    <div>Comments: 
+      <%= @post.comment_counter.nil? ? 0 : @post.comment_counter%>
+      , Likes: 
+      <%= @post.like_counter.nil? ? 0 : @post.like_counter %></div>
+  </div>
+  <div class="post-body"><%= @post.text %></div>
+  <br>
+  <%= render partial: "like", locals: { like: Like.new } %>
+  <% if can? :destroy, @post %>
+    <%= button_to "Delete", delete_post_path(post_id: @post.id), method: :delete, data: {
+      turbolinks: false,
+    } %>
+  <% end %>
+  <br>
+  <div class="comments">
+    <h3>Comments:</h3>
+    <%= render partial: "comment", locals: { comment: Comment.new }%>
+    <br>
+    <%= render partial: "shared/comment", collection: @post.comments %>
+  </div>
+</section>

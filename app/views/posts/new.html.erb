@@ -1,0 +1,13 @@
+<section class="new-post">
+  <h1>Create Post</h1>
+  <%= render partial: 'shared/flash'%>
+  <%= form_with model: post, url: posts_path(user_id: current_user.id), method: post, html: {class: "post-form"}, local: true, scope: :post do |f| %>
+    <div>
+      <%= f.text_field :title, placeholder: "Post Title" %>
+    </div>
+    <div>
+      <%= f.text_area :text, placeholder: "Place Text", size: "30x5" %>
+    </div>
+    <%= f.submit "Add Post" %>
+  <% end %>
+</section>

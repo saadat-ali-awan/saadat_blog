@@ -1,0 +1,22 @@
+<div class="post">
+
+  <a href="<%= user_post_path(user_id: post_detail.user_id, id: post_detail.id) %>">
+    <div class="post-number">Post #<%= post_detail.id %></div>
+  </a>
+
+  <div class="post-detail"><%= post_detail.title %></div>
+  <div class="post-detail"><%=h truncate(post_detail.text, :length => 80)%></div>
+  <div class="likes-comments">Comments: 
+    <%= post_detail.comment_counter == nil ? 0 : post_detail.comment_counter %>, Likes: 
+    <%= post_detail.like_counter == nil ? 0 : post_detail.like_counter %>
+  </div>
+  <%if display_comments == true%>
+    <% if current_page?(:controller => 'posts', :action => 'index') %>
+      <% if post_detail.comments.length > 0 %>
+        <%= render partial: "shared/comment", collection: [ post_detail.comments.last ] %>
+      <% end %>
+    <% else %>
+      <%= render partial: "shared/comment", collection: post_detail.comments %>
+    <% end %>
+  <%end%>
+</div>
